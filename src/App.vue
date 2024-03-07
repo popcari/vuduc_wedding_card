@@ -92,7 +92,7 @@
         </div>
       </div>
     </div>
-
+    <!-- carousel -->
     <div class="section carousel w-full">
       <h2
         id="gallery"
@@ -101,10 +101,10 @@
         <a href="#gallery"> Our gallery </a>
       </h2>
       <carousel
-        :items-to-show="1.5"
         wrapAround
-        transition="500"
-        autoplay="3000"
+        :items-to-show="1.5"
+        :transition="1500"
+        :autoplay="3000"
       >
         <slide
           v-for="item in carouselList"
@@ -123,6 +123,7 @@
         </template>
       </carousel>
     </div>
+    <!-- about us -->
     <div class="section about w-full">
       <h2
         id="about"
@@ -197,6 +198,22 @@
         </div>
       </div>
     </div>
+    <!-- calendar -->
+    <div class="section calendar w-full flex flex-col items-center">
+      <h2
+        id="calendar"
+        class="text-[40px] mb-4 lg:text-[50px] cursor-pointer"
+      >
+        <a href="#calendar"> Calendar </a>
+      </h2>
+      <div class="calendar-group w-full md:w-[60%] lg:w-[40%]">
+        <VCalendar
+          view="monthly"
+          :expanded="true"
+          :attributes="attributes"
+        />
+      </div>
+    </div>
     <el-backtop
       :right="30"
       :bottom="30"
@@ -222,6 +239,32 @@
   const handleClick = (tab: TabsPaneContext, event: Event) => {
     console.log(tab, event);
   };
+
+  const attributes = ref([
+    {
+      // highlight: 'blue',
+      dates: [new Date()],
+      dot: true, // Boolean, String, Object
+      highlight: {
+        color: 'blue',
+        fillMode: 'light',
+      },
+    },
+    {
+      highlight: 'red',
+      dates: [new Date(2024, 2, 24)],
+      popover: {
+        label: 'Hope to see you at my wedding ceremony at 14:00 !',
+        dot: 'red',
+      },
+
+      content: {
+        style: {
+          fontStyle: 'italic',
+        },
+      },
+    },
+  ]);
 </script>
 
 <style scoped>
@@ -238,5 +281,8 @@
 
   ul li {
     margin-bottom: 5px;
+  }
+  .my-calendar :deep(.vc-weekday-1, .vc-weekday-7) {
+    color: #6366f1;
   }
 </style>
