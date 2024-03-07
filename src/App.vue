@@ -1,6 +1,6 @@
 <template>
   <Header></Header>
-  <div class="body w-full absolute top-[70px]">
+  <div class="body w-full absolute text-center top-[70px] px-4">
     <div class="section navbar w-full">
       <el-tabs
         v-model="activeName"
@@ -15,7 +15,7 @@
         >
           <template #label>
             <div class="custom-tabs-label flex items-center gap-1">
-              <el-icon class="text-[#f6f6f6]"><calendar /></el-icon>
+              <el-icon class="text-[#f6f6f6]"><HomeFilled /></el-icon>
               <div class="hidden sm:block">Home</div>
             </div>
           </template>
@@ -94,31 +94,112 @@
     </div>
 
     <div class="section carousel w-full">
-      <div class="block text-center">
-        <el-carousel
-          trigger="click"
-          height="700px"
-          type="card"
-          autoplay="false"
-          interval="0"
+      <h2
+        id="gallery"
+        class="text-[40px] mb-4 lg:text-[50px] cursor-pointer"
+      >
+        <a href="#gallery"> Our gallery </a>
+      </h2>
+      <carousel
+        :items-to-show="1.5"
+        wrapAround
+        transition="500"
+        autoplay="3000"
+      >
+        <slide
+          v-for="item in carouselList"
+          :key="item"
         >
-          <el-carousel-item
-            v-for="item in carouselList"
-            :key="item"
-          >
+          <img
+            class="object-cover"
+            :src="item.src"
+            alt=""
+          />
+        </slide>
+
+        <template #addons>
+          <navigation />
+          <pagination />
+        </template>
+      </carousel>
+    </div>
+    <div class="section about w-full">
+      <h2
+        id="about"
+        class="text-[40px] mb-4 lg:text-[50px] cursor-pointer"
+      >
+        <a href="#about"> About us </a>
+      </h2>
+      <div class="flex flex-col gap-[10px]">
+        <div class="groom text-xs lg:text-sm flex row">
+          <div class="imageSection flex items-end">
             <img
-              class="object-cover"
-              :src="item.src"
+              class="h-[250px] lg:h-[400px]"
+              src="./assets/wedding_carousel_logo/img_10.jpg"
               alt=""
             />
-          </el-carousel-item>
-        </el-carousel>
+            <div
+              class="infoSection mb-[2%] p-2 backdrop-invert bg-white w-[250px] h-fit text-left ml-[-30px] rounded-lg shadow-lg"
+            >
+              <ul>
+                <li>
+                  <label class="font-semibold"
+                    >Name: <span>Vũ Đình Đức</span></label
+                  >
+                </li>
+                <li>
+                  <label class="font-semibold"
+                    >BOD: <span>11/01/1998</span></label
+                  >
+                </li>
+                <li>
+                  <label>
+                    As you take this step into forever, may your days be filled
+                    with love, your nights be filled with laughter, and your
+                    hearts be forever intertwined
+                  </label>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="bride text-xs lg:text-sm flex flex-row-reverse">
+          <div class="imageSection flex items-end flex-row-reverse">
+            <img
+              class="h-[250px] lg:h-[400px]"
+              src="./assets/wedding_carousel_logo/img_9.jpg"
+              alt=""
+            />
+            <div
+              class="infoSection mb-[2%] p-2 backdrop-invert bg-white w-[250px] h-fit mr-[-30px] text-right rounded-lg shadow-lg"
+            >
+              <ul>
+                <li>
+                  <label class="font-semibold"
+                    >Name: <span>Nguyễn Thị Bái</span></label
+                  >
+                </li>
+                <li>
+                  <label class="font-semibold"
+                    >BOD: <span>27/11/1998</span></label
+                  >
+                </li>
+                <li>
+                  <label>
+                    To the radiant bride, may your marriage be as stunning as
+                    you are today, filled with love, laughter, and a lifetime of
+                    cherished moments
+                  </label>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="section w-full"></div>
     <el-backtop
-      :right="100"
-      :bottom="100"
+      :right="30"
+      :bottom="30"
     />
   </div>
 </template>
@@ -127,8 +208,15 @@
   import Header from './components/Header.vue';
   import { carouselList } from './constants/constants';
   import type { TabsPaneContext } from 'element-plus';
-  import { Calendar, LocationInformation, User, Phone } from '@element-plus/icons-vue';
-
+  import {
+    HomeFilled,
+    Calendar,
+    LocationInformation,
+    User,
+    Phone,
+  } from '@element-plus/icons-vue';
+  import 'vue3-carousel/dist/carousel.css';
+  import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
 
   const activeName = ref('first');
   const handleClick = (tab: TabsPaneContext, event: Event) => {
@@ -140,16 +228,15 @@
   .section {
     margin-bottom: 40px;
   }
-  .date {
-  }
+
   .demo-tabs > .el-tabs__item {
     padding: 32px;
     color: #6b778c;
     font-size: 32px;
     font-weight: 600;
   }
-  /deep/.flip-clock {
-    margin: 0 !important;
-    width: fit-content;
+
+  ul li {
+    margin-bottom: 5px;
   }
 </style>
