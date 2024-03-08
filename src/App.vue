@@ -1,11 +1,21 @@
 <template>
   <Header></Header>
+  <el-dialog
+    width="80%"
+    center
+    v-model="startModalisOpen"
+  >
+    <img
+      src="./assets/card.png"
+      alt=""
+    />
+  </el-dialog>
   <div class="body w-full absolute text-center top-[70px] px-4">
     <div class="section navbar w-full">
       <el-tabs
         v-model="activeName"
         class="demo-tabs"
-        @tab-click="handleClick"
+        @tab-change="changeTab"
         stretch
         lazy
       >
@@ -68,7 +78,10 @@
       </el-tabs>
     </div>
     <!-- date -->
-    <div class="section date w-full relative">
+    <div
+      ref="date"
+      class="section date w-full relative"
+    >
       <img
         class="w-full h-auto xl:h-screen"
         src="./assets/background.jpeg"
@@ -93,7 +106,10 @@
       </div>
     </div>
     <!-- carousel -->
-    <div class="section carousel w-full">
+    <div
+      ref="carousels"
+      class="section carousel w-full"
+    >
       <h2
         id="gallery"
         class="text-[40px] mb-4 lg:text-[50px] cursor-pointer"
@@ -124,7 +140,10 @@
       </carousel>
     </div>
     <!-- about us -->
-    <div class="section about w-full">
+    <div
+      ref="about"
+      class="section about w-full"
+    >
       <h2
         id="about"
         class="text-[40px] mb-4 lg:text-[50px] cursor-pointer"
@@ -199,7 +218,10 @@
       </div>
     </div>
     <!-- calendar -->
-    <div class="section calendar w-full flex flex-col items-center">
+    <div
+      ref="calendar"
+      class="section calendar w-full flex flex-col items-center"
+    >
       <h2
         id="calendar"
         class="text-[40px] mb-4 lg:text-[50px] cursor-pointer"
@@ -214,6 +236,60 @@
         />
       </div>
     </div>
+    <!-- Location -->
+    <div
+      ref="location"
+      class="section location contact w-full flex flex-col items-center"
+    >
+      <h2
+        id="location"
+        class="text-[40px] mb-4 lg:text-[50px] cursor-pointer"
+      >
+        <a href="#location"> Location </a>
+      </h2>
+      <div
+        class="location-group flex flex-col w-full gap-4 lg:flex-row lg:gap-5"
+      >
+        <div class="map p-2">
+          <iframe
+            class="w-full h-[400px] lg:w-[600px] lg:h-[600px] xl:w-[800px]"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5602.861131827228!2d106.08762679223112!3d21.195409572745262!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31350dc40029ae51%3A0xaff5c9b5cadf0419!2zTmjDoCBWxINuIEjDs2EgUGjGsOG7nW5nIMSQw6FwIEPhuqd1!5e0!3m2!1svi!2s!4v1709908543443!5m2!1svi!2s"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+        <div class="infor p-2 flex flex-col gap-3">
+          <div class="infor-item flex">
+            <el-icon
+              :size="20"
+              color="#E43b56"
+              ><MapLocation
+            /></el-icon>
+            <h4 class="ml-2 text-left">
+              Nhà văn hoá phường Đáp Cầu, tp Bắc Ninh, tỉnh Bắc Ninh
+            </h4>
+          </div>
+          <div class="infor-item flex">
+            <el-icon
+              :size="20"
+              color="#F79F5A"
+              ><Clock
+            /></el-icon>
+            <h4 class="ml-2 text-left">14:00 - 24/03/2024</h4>
+          </div>
+          <div class="infor-item flex">
+            <el-icon
+              :size="20"
+              color="#5AA4F7"
+              ><Phone
+            /></el-icon>
+            <h4 class="ml-2 text-left">0388657474</h4>
+          </div>
+        </div>
+      </div>
+    </div>
     <el-backtop
       :right="30"
       :bottom="30"
@@ -221,7 +297,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { ref } from 'vue';
+  import { ref, watch } from 'vue';
   import Header from './components/Header.vue';
   import { carouselList } from './constants/constants';
   import type { TabsPaneContext } from 'element-plus';
@@ -231,15 +307,13 @@
     LocationInformation,
     User,
     Phone,
+    MapLocation,
+    Clock,
   } from '@element-plus/icons-vue';
   import 'vue3-carousel/dist/carousel.css';
   import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
 
   const activeName = ref('first');
-  const handleClick = (tab: TabsPaneContext, event: Event) => {
-    console.log(tab, event);
-  };
-
   const attributes = ref([
     {
       // highlight: 'blue',
@@ -265,6 +339,30 @@
       },
     },
   ]);
+
+  const changeTab = () => {};
+  const date = ref(null);
+  const calendar = ref(null);
+  const about = ref(null);
+  const location = ref(null);
+
+  watch(activeName, (name) => {
+    const scrollToElement = {
+      first: date,
+      second: about,
+      third: calendar,
+      fourth: location,
+      fifth: location,
+    };
+
+    const targetElement = scrollToElement[name];
+
+    if (targetElement) {
+      targetElement.value.scrollIntoView();
+    }
+  });
+
+  const startModalisOpen = ref(true);
 </script>
 
 <style scoped>
