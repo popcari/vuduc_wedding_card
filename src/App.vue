@@ -124,7 +124,7 @@
       >
         <slide
           v-for="item in carouselList"
-          :key="item"
+          :key="item.src"
         >
           <img
             class="object-cover"
@@ -277,7 +277,7 @@
               color="#F79F5A"
               ><Clock
             /></el-icon>
-            <h4 class="ml-2 text-left">14:00 - 24/03/2024</h4>
+            <h4 class="ml-2 text-left">9:00 - 24/03/2024</h4>
           </div>
           <div class="infor-item flex">
             <el-icon

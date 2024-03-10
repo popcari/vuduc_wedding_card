@@ -1,43 +1,54 @@
+import image1 from '../assets/wedding_carousel_logo/img_1.jpg';
+import image2 from '../assets/wedding_carousel_logo/img_2.jpg';
+import image3 from '../assets/wedding_carousel_logo/img_3.jpg';
+import image4 from '../assets/wedding_carousel_logo/img_4.jpg';
+import image5 from '../assets/wedding_carousel_logo/img_5.jpg';
+import image6 from '../assets/wedding_carousel_logo/img_6.jpg';
+import image7 from '../assets/wedding_carousel_logo/img_7.jpg';
+import image8 from '../assets/wedding_carousel_logo/img_8.jpg';
+import image9 from '../assets/wedding_carousel_logo/img_9.jpg';
+import image10 from '../assets/wedding_carousel_logo/img_10.jpg';
+
 const carouselList = [
   {
     id: 1,
-    src: 'src/assets/wedding_carousel_logo/img_1.jpg',
+    src: image1,
   },
   {
     id: 2,
-    src: 'src/assets/wedding_carousel_logo/img_2.jpg',
+    src: image2,
   },
   {
     id: 3,
-    src: 'src/assets/wedding_carousel_logo/img_3.jpg',
+    src: image3,
   },
   {
     id: 4,
-    src: 'src/assets/wedding_carousel_logo/img_4.jpg',
+    src: image4,
   },
   {
     id: 5,
-    src: 'src/assets/wedding_carousel_logo/img_5.jpg',
+    src: image5,
   },
   {
     id: 6,
-    src: 'src/assets/wedding_carousel_logo/img_6.jpg',
+    src: image6,
   },
   {
     id: 7,
-    src: 'src/assets/wedding_carousel_logo/img_7.jpg',
+    src: image7,
   },
   {
     id: 8,
-    src: 'src/assets/wedding_carousel_logo/img_8.jpg',
+    src: image8,
   },
   {
     id: 9,
-    src: 'src/assets/wedding_carousel_logo/img_9.jpg',
+    src: image9,
   },
   {
     id: 10,
-    src: 'src/assets/wedding_carousel_logo/img_10.jpg',
+    src: image10,
   },
 ];
 const menuTab = [
