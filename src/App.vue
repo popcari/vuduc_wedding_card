@@ -1,9 +1,38 @@
 <template>
   <Header></Header>
+  <audio
+    hidden="true"
+    ref="audio"
+  >
+    <source
+      src="./assets/theme_song.mp3"
+      type="audio/mpeg"
+    />
+  </audio>
+  <div class="audio-play fixed bottom-[30px] left-[30px] z-20 scale-150">
+    <el-button
+      v-if="isPlaying"
+      type="primary"
+      circle
+      class="transition-all duration-300 hover:scale-110"
+      :icon="VideoPause"
+      @click="onPauseMusic"
+    />
+    <el-button
+      v-else
+      type="primary"
+      plain
+      circle
+      class="transition-all duration-300 hover:scale-110"
+      :icon="VideoPlay"
+      @click="onPlayMusic"
+    />
+  </div>
   <el-dialog
     width="80%"
     center
     v-model="startModalisOpen"
+    @closed="dialogClosed"
   >
     <img
       src="./assets/card.png"
@@ -309,6 +338,8 @@
     Phone,
     MapLocation,
     Clock,
+    VideoPause,
+    VideoPlay,
   } from '@element-plus/icons-vue';
   import 'vue3-carousel/dist/carousel.css';
   import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
@@ -339,6 +370,8 @@
       },
     },
   ]);
+  const audio = ref<HTMLAudioElement>();
+  const isPlaying = ref(true);
 
   const changeTab = () => {};
   const date = ref(null);
@@ -363,6 +396,17 @@
   });
 
   const startModalisOpen = ref(true);
+  const dialogClosed = () => {
+    audio.value?.play();
+  };
+  const onPauseMusic = () => {
+    isPlaying.value = false;
+    audio.value?.pause();
+  };
+  const onPlayMusic = () => {
+    isPlaying.value = true;
+    audio.value?.play();
+  };
 </script>
 
 <style scoped>
